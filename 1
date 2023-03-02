@@ -1,0 +1,23 @@
+from dataclasses import dataclass, asdict
+from typing import Dict, Type, ClassVar
+@dataclass
+class InfoMessage:
+    """
+    Класс для создания объектов сообщений.
+    Информационное сообщение о тренировке.
+    """
+    training_type: str  # Название тренировки
+    duration: float     # Длительность (в часах)
+    distance: float     # Дистанция в (в км)
+    speed: float        # Скорость (в км/ч)
+    calories: float     # Килокалории
+    message: str = ('Тип тренировки: {training_type}; '
+                    'Длительность: {duration:.3f} ч.; '
+                    'Дистанция: {distance:.3f} км; '
+                    'Ср. скорость: {speed:.3f} км/ч; '
+                    'Потрачено ккал: {calories:.3f}.')
+    # числовые значения округляются при выводе до тысячных долей с помощью
+    # format specifier (.3f)
+    def get_message(self) -> str:
+        """Метод возвращает строку сообщения"""
+        return self.message.format(**asdict(self))
